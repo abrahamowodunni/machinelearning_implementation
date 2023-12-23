@@ -4,7 +4,7 @@ from flask  import Flask, request,app, jsonify, url_for, render_template
 import pandas as pandas
 import numpy as np 
 
-app = Flask(__name__, template_folder= 'templates')
+app = Flask(__name__, template_folder= 'templates',static_url_path='/static')
 
 regmodel = pickle.load(open('regmodel.pkl','rb'))
 scaler = pickle.load(open('scaling.pkl','rb'))
