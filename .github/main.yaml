@@ -1,0 +1,41 @@
+# Your workflow name.
+name: Deploy to Render.
+
+# Run workflow on every push to main branch.
+on:
+  push:
+    branches: [main]
+
+# Your workflows jobs.
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      # Check-out your repository.
+      - name: Checkout
+        uses: actions/checkout@v2
+
+
+### ⬇ IMPORTANT PART ⬇ ###
+
+      - name: Set up Docker Buildx # Your custom step name
+        uses: docker/setup-buildx-action@v1 # GitHub action name (leave it as it is).
+        with:
+          
+          email: ${{ secrets.RENDER_EMAIL }}
+          
+          
+          heroku_api_key: ${{ secrets.RENDER_API_KEY }}
+        
+          heroku_app_name: ${{ secrets.RENDER_APP_NAME }}
+
+          dockerfile_directory: ./
+
+          dockerfile_name: Dockerfile
+
+          docker_options: "--no-cache"
+
+          process_type: web
+          
+   
+          
